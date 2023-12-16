@@ -15,3 +15,8 @@ js.build()
 @app.route('/')
 def index():
     return template('index.html')
+
+@app.route('/users')
+def users():
+    return '<p>Users</p>'
+
