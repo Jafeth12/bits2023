@@ -1,7 +1,11 @@
-from flask import Flask, render_template as template
+from flask import Flask
 from flask_assets import Bundle, Environment
+from dracula.db import db
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dracukeo.db'
+
+db.init_app(app)
 
 assets = Environment(app)
 css = Bundle('src/main.css', output='dist/main.css')
@@ -12,11 +16,4 @@ assets.register("js", js)
 css.build()
 js.build()
 
-@app.route('/')
-def index():
-    return template('index.html')
-
-@app.route('/users')
-def users():
-    return '<p>Users</p>'
-
+from dracula import routes, models
