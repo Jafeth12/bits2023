@@ -4,7 +4,15 @@ from dracula import app, db
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+@app.route('/uploads')
+def uploads():
+    return render_template('uploads.html')
 
 # === Routes ===
 

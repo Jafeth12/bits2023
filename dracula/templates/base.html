@@ -20,13 +20,11 @@
         <title> Dracukeo </title>
     </head>
     <body class="bg-blue-100">
-        <button hx-trigger="click" hx-get="/users" hx-target="#result">Click Me</button>
-        <div id="result" class="text-2xl"></div>
-
-        <input type="file" id="file" name="file" hx-post="/upload" hx-target="#upload_result" hx-encoding="multipart/form-data">
-        <div id="upload_result" class="text-2xl"></div>
-
         {% block content %}
+            <h1> HOLA EN BASE </h1>
         {% endblock content %}
     </body>
+    <footer>
+
+    </footer>
 </html>
