@@ -1,6 +1,7 @@
 import os
 from flask import render_template, request, jsonify, url_for
 from dracula import app, db
+from dracula.models import Cicle, Sample, Day
 
 @app.route('/')
 def index():
@@ -10,9 +11,9 @@ def index():
 def home():
     return render_template('home.html')
 
-@app.route('/uploads')
-def uploads():
-    return render_template('uploads.html')
+@app.route('/cicle/<int:id>')
+def cicle(id):
+    return render_template('cicle.html', id=id)
 
 # === Routes ===
 
