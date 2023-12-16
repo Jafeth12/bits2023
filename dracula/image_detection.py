@@ -1,6 +1,6 @@
-import sys
 import cv2
 import numpy as np
+
 
 def write_contours(img, contours):
     cv2.drawContours(img, contours, -1, (0, 255, 0), 2)
@@ -33,19 +33,21 @@ def get_area_period(img):
     for cnt in period_contours:
         # Get the area_period of each contour 
         area_period += cv2.contourArea(cnt)
+    write_period(img, area_period, period_contours)
     return area_period
 
 # Get area of towel
 def get_total_area(img):
     # define mask for towel color in BGR
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    _, thresh = cv2.threshold(gray, 220, 200, cv2.THRESH_BINARY)
+    _, thresh = cv2.threshold(gray, 200, 200, cv2.THRESH_BINARY)
     towel_contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     # Compute area_towel 
     area_towel = 0
     for cnt in towel_contours:
         area_towel += cv2.contourArea(cnt)
     area_period = get_area_period(img)
+    write_towel(img, area_towel, towel_contours)
     return area_towel+area_period, area_period 
 
 def compute_percentage(img):
@@ -53,11 +55,16 @@ def compute_percentage(img):
     percentage = area_period/area_towel
     return percentage*100
 
-
-path = sys.argv[1]
-img = cv2.imread(path)
-percentage = compute_percentage(img)
-print("Percentage of period: ", percentage)
-
+def get_score(path):
+    img = cv2.imread(path)
+    percentage = compute_percentage(img)
+    score = 0
+    if percentage >= 50:
+        score = 20
+    elif percentage >= 25:
+        score = 5
+    else:
+        score = 1
+    return score,percentage
 
 
