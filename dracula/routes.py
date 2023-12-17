@@ -76,6 +76,7 @@ def create_day():
 
     cicle_id = request.form['cicle_id']
     day = request.form['date']
+    last = request.form['last_day']
 
     if 'file' not in request.files:
         # ERR: No file in request
@@ -100,7 +101,10 @@ def create_day():
     db.session.add(sample)
     db.session.commit()
 
-    return 'Dia creat'
+    if last:
+        return quiz(cicle_id)
+
+    return home()
 
 # @app.route('/dbg', methods=['GET'])
 # def dbg():
