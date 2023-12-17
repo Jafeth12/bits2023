@@ -1,7 +1,7 @@
 import os
 from flask import render_template, request, jsonify, url_for
 from dracula import app, db
-from dracula.quiz import questions 
+from dracula.quiz import questions, determine_alert 
 
 @app.route('/')
 def index():
@@ -15,9 +15,10 @@ def home():
 def uploads():
     return render_template('uploads.html')
 
-@app.route('/quiz')
-def quiz():
-    return render_template('samanta_quiz.html', quest=questions)
+@app.route('/quiz/<int:cicle_id>')
+def quiz(cicle_id):
+    cicle_score = get_cicle_score(cicle_id)
+    return render_template('samanta_quiz.html', quest=questions, score=cicle_score)
 
 # === Routes ===
 
@@ -35,3 +36,16 @@ def upload_image():
         filename = file.filename or ''
         file.save(os.path.join('dracula/static/upload', filename))
         return '<p>File recieved</p>'
+
+@app.route('/quiz_submit', methods=['POST'])
+def quiz_submit():
+    return determine_alert(request.form)
+
+ 
+
+
+
+
+
+
+

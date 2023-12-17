@@ -10,9 +10,9 @@
             <div class="card">
                 <div class="card-body">
                 <h5 class="card-title">{{ q['question'] }}</h5>
-                {% for opcion in q['options'] %}
+                {% for option in q['options'] %}
                     <div class="form-check">
-                        <input type="radio" name="{{ q['question'] }}" id="{{ option }}" value="{{ option }}">
+                        <input type="radio" name = q['question']}}" id="{{ option }}" value="{{ option }}">
                         <label for="{{ option }}">{{ opcion }}</label>
                     </div>
                 {% endfor %}
@@ -20,8 +20,22 @@
             </div>
         {% endfor %}
         <br>
-        <button type="submit" class="btn btn btn-primary btn-lg">Enviar respuestas</button>
+    <button type="submit" class="btn btn btn-primary btn-lg" hx-post="/quiz_submit" hx-target="#response">Enviar</button>
     </form>
+</div>
+
+<div id="response">
+ {% if response == 'correct' %}
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Correcto!</h4>
+        <p>Respuesta correcta</p>
+    </div>
+ {% elif response == 'alert' %}
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Incorrecto!</h4>
+        <p>Respuesta incorrecta</p>
+    </div>
+ {% endif %}
 </div>
 
 {% endblock %}
