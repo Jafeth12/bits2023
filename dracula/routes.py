@@ -1,14 +1,15 @@
 import os
 from flask import render_template, request, jsonify, url_for
 from dracula import app, db
+from dracula.models import Cicle
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('home.html', cicles=Cicle.query.all())
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', cicles=Cicle.query.all())
 
 @app.route('/uploads')
 def uploads():

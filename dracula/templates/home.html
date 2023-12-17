@@ -4,4 +4,12 @@
 
 <h1> HOLA EN HOME </h1>
 
+{% for c in cicles %}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+          <h1>Cicle {{ c.id }}</h1>
+      </div>
+    </div>
+{% endfor %}
+
 {% endblock %}

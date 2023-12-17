@@ -15,7 +15,9 @@ class Day(db.Model):
 
 class Cicle(db.Model):
     id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
-    day_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('day.id'), nullable=False)
+
+    def __init__(self, id):
+        self.id = id
 
 with app.app_context():
     db.create_all()
