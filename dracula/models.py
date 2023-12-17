@@ -14,6 +14,7 @@ class Sample(db.Model):
         self.filename = filename
         self.score = score
         self.day_id = day_id
+        self.percentage = percentage
 
 class Day(db.Model):
     id: Mapped[int] = mapped_column(db.Integer, primary_key=True, autoincrement=True)
@@ -26,6 +27,7 @@ class Day(db.Model):
 
 class Cicle(db.Model):
     id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
+    is_active: Mapped[bool] = mapped_column(db.Boolean, default=True)
 
 with app.app_context():
     db.create_all()

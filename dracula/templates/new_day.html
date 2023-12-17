@@ -6,20 +6,25 @@
 <hr>
 
 <div>
-    <form class="m-3" action="/create_day">
+    <form class="m-3" action="/create_day" method="post" enctype="multipart/form-data">
         <div class="form-row mb-2">
             <div class="form-group col-md-6">
                 <label for="cicle_id">Cicle</label><br/>
-                <input type="cicle_id" id="number" value="{{ cicle_id }}" disabled>
+                <input type="number" id="cicle_id" name="cicle_id" value="{{ cicle_id }}" readonly>
             </div>
             <div class="form-group col-md-6">
                 <label for="date">Date</label><br/>
-                <input type="date" id="date" placeholder="Password">
+                <input type="date" id="date" name="date" placeholder="Password">
             </div>
         </div>
-        <div class="form-row col-md-6 mb-3">
+        <div class="form-group col-md-6 mb-3">
             <label for="uploadFile">Picture</label>
-            <input type="file" class="form-control" id="file" name="file" hx-encoding="multipart/form-data">
+            <input type="file" class="form-control" id="file" name="file">
+        </div>
+        <div class="form-group mb-3">
+            <!-- check if is the last day -->
+            <input type="checkbox" class="form-check-input" id="last_day" name="last_day" value="1">
+            <label class="form-check-label" for="last_day">Last day</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

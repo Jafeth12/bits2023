@@ -64,11 +64,11 @@ def new_day(cicle_id):
 
 @app.route('/create_day/', methods=['POST'])
 def create_day():
-    cicle_id = request.form['cicle_id']
-    day = request.form['day']
-    day = Day(day, cicle_id)
+    print(request.form)
+    print(request.files)
 
-    print(request)
+    cicle_id = request.form['cicle_id']
+    day = request.form['date']
 
     if 'file' not in request.files:
         # ERR: No file in request
@@ -81,11 +81,16 @@ def create_day():
 
     score, percentage = get_score(path)
 
+    print(score)
+    print(percentage)
+
+    day = Day(day, cicle_id)
+    db.session.add(day)
+    db.session.commit()
+
     sample = Sample(filename, score, percentage, day.id)
 
-    db.session.add(day)
     db.session.add(sample)
-
     db.session.commit()
 
     return 'Dia creat'
