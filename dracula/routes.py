@@ -42,7 +42,7 @@ def upload_image():
         file.save(os.path.join('dracula/static/upload', filename))
         return '<p>File recieved</p>'
 
-@app.route('/newcicle', methods=['POST'])
+@app.route('/newcicle', methods=['PUT'])
 def cicle():
     cicle = Cicle()
     db.session.add(cicle)
