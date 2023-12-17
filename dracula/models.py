@@ -44,6 +44,6 @@ with app.app_context():
     # for i in range(1, 3):
     #     db.session.add(Sample("example/path", 20, i))
 
-    db.session.commit()
+    # db.session.commit()
 
 

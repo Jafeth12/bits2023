@@ -19,7 +19,10 @@ def home():
 
 @app.route('/cicle/<int:id>')
 def cicle(id):
-    return render_template('cicle.html', id=id)
+    cicle = Cicle.query.filter_by(id=id)
+    days = Day.query.filter_by(cicle_id=id)
+
+    return render_template('cicle.html', cicle=cicle, days=days)
 
 @app.route('/quiz')
 def quiz():
@@ -43,7 +46,7 @@ def upload_image():
         return '<p>File recieved</p>'
 
 @app.route('/newcicle', methods=['PUT'])
-def cicle():
+def new_cicle():
     cicle = Cicle()
     db.session.add(cicle)
     db.session.commit()

@@ -5,7 +5,19 @@
 <!-- ciclo id at $id -->
 
 <div class="row">
-    <h1> Ciclo {{ id }} </h1>
+    <h1> Ciclo {{ cicle.id }} </h1>
+
+    {% for day in days %}
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <div class="text-center">
+            <h1 class="text-start"> {{ day.date }} </h1>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+
 </div>
 
 
