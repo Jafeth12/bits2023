@@ -50,7 +50,7 @@ def new_cicle():
     cicle = Cicle()
     db.session.add(cicle)
     db.session.commit()
-    return 'Afegir cicle';
+    return 'Afegir cicle'
 
 # @app.route('/dbg', methods=['GET'])
 # def dbg():
