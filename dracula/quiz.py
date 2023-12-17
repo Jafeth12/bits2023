@@ -1,4 +1,6 @@
-# Lista de preguntas y options de respuesta
+score = 0
+
+# List of questions
 questions = [
     {
         'question': '¿Sangra durante más de 7 días al mes?',
@@ -25,3 +27,16 @@ questions = [
         'options': ['Sí', 'No'],
     }
 ]
+
+def determine_alert(answers):
+    confirmations = 0
+    for answer in answers:
+        if answer == 'Sí':
+            confirmations += 1
+    alert = ''
+    # redirect to home
+    if confirmations >= 3 and score >= 100 :
+        alert = 'Debería ir a ver a un profesional'
+    else:
+        alert = 'Todo gucci'
+    return '<script>alert("' + alert + '"); window.location.href = "/";</script>'
