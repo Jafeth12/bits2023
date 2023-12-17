@@ -4,9 +4,9 @@
 
 <h1> DracuKeo </h1>
 
-<div class="center-block">
+<div class="container-fluid">
     {% for c in cicles_with_scores %}
-      <div class="card" style="width: 18rem;">
+      <div class="card" style="width: 100%">
         <div class="card-body">
           <div class="text-center">
             <h1 class="text-start" href="/uploads"> Cicle {{ c.0.id }} </h1>
@@ -20,12 +20,13 @@
         <a class="btn btn-secondary" href="/cicle/{{ c.0.id }}"> Veure cicle </a>
       </div>
     {% endfor %}
+
+    <!-- Crear un nuevo ciclo -->
+    <button type="button" class="btn btn-primary" hx-put="/newcicle" href="/home">
+      Afegir cicle
+    </button>
 </div>
 
-<!-- Crear un nuevo ciclo -->
-<button type="button" class="btn btn-primary" hx-put="/newcicle">
-  Afegir cicle
-</button>
 
 
 {% endblock %}
