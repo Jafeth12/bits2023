@@ -24,7 +24,7 @@ class Day(db.Model):
         self.cicle_id = cicle_id
 
 class Cicle(db.Model):
-    id: Mapped[int] = mapped_column(db.Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(db.Integer, primary_key=True)
 
 with app.app_context():
     db.create_all()

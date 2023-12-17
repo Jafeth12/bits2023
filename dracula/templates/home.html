@@ -2,6 +2,29 @@
 
 {% block content %}
 
-<h1> HOLA EN HOME </h1>
+<h1> DracuKeo </h1>
+
+<div class="center-block">
+    {% for c in cicles_with_scores %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <div class="text-center">
+            <h1 class="text-start" href="/uploads"> Cicle {{ c.0.id }} </h1>
+            {% if c.1 >= 100 %}
+                <p class="text-end text-danger">! {{ c.1 }} !</p>
+            {% else %}
+                <p class="text-end text-dark"> {{ c.1 }} </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+<!-- Crear un nuevo ciclo -->
+<button type="button" class="btn btn-primary" hx-put="/newcicle">
+  Afegir cicle
+</button>
+
 
 {% endblock %}
