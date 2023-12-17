@@ -1,5 +1,5 @@
 import os
-from flask import render_template, request, jsonify, url_for
+from flask import render_template, request, jsonify, url_for, redirect
 from dracula import app, db
 from dracula.quiz import questions, determine_alert 
 from dracula.models import Cicle, Day, Sample
@@ -13,7 +13,7 @@ def home():
     cicles = Cicle.query.all()
     punts = []
     for cicle in cicles:
-        punts.append(get_cicle_score(cicle))
+        punts.append(get_cicle_score(cicle.id))
     cicles_with_scores = zip(cicles, punts)
     return render_template('home.html', cicles_with_scores=cicles_with_scores)
 
@@ -48,7 +48,8 @@ def upload_image():
 
 @app.route('/quiz_submit', methods=['POST'])
 def quiz_submit():
-    return determine_alert(request.form)
+    a = determine_alert(request.form)
+    return a
 
 @app.route('/newcicle', methods=['PUT'])
 def new_cicle():
@@ -66,7 +67,7 @@ def new_cicle():
 
 # Hacer el sumatorio de los scores de los samples de un ciclo
 def get_cicle_score(cicle):
-    days = Day.query.filter_by(cicle_id=cicle.id)
+    days = Day.query.filter_by(cicle_id=cicle)
     total = 0
     for day in days:
         samples = Sample.query.filter_by(day_id=day.id)

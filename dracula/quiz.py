@@ -1,4 +1,3 @@
-
 score = 0
 
 # List of questions
@@ -32,10 +31,12 @@ questions = [
 def determine_alert(answers):
     confirmations = 0
     for answer in answers:
-        if answer.value == 'Sí':
+        if answer == 'Sí':
             confirmations += 1
+    alert = ''
+    # redirect to home
     if confirmations >= 3 and score >= 100 :
-        # Return alert html
-        return '<p>Debería ir al ginecólogo</p>'
+        alert = 'Debería ir a ver a un profesional'
     else:
-        return '<p>No debería ir al ginecólogo</p>'
+        alert = 'Todo gucci'
+    return '<script>alert("' + alert + '"); window.location.href = "/";</script>'
