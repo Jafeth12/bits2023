@@ -7,9 +7,10 @@ class Sample(db.Model):
     # filename: Mapped[str] = mapped_column(db.String(80), unique=True, nullable=False)
     filename: Mapped[str] = mapped_column(db.String(80), nullable=False) # deberia ser unique pero sudaa
     score: Mapped[int] = mapped_column(db.Integer, nullable=False)
+    percentage: Mapped[int] = mapped_column(db.Integer, nullable=False)
     day_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('day.id'), nullable=False)
 
-    def __init__(self, filename, score, day_id):
+    def __init__(self, filename, score, percentage, day_id):
         self.filename = filename
         self.score = score
         self.day_id = day_id

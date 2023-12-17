@@ -3,6 +3,7 @@ from flask import render_template, request, jsonify, url_for
 from dracula import app, db
 from dracula.models import Cicle, Day, Sample
 from dracula.quiz import questions
+from dracula.image_detection import get_score
 
 @app.route('/')
 def index():
@@ -56,6 +57,38 @@ def new_cicle():
     db.session.add(cicle)
     db.session.commit()
     return 'Afegir cicle';
+
+@app.route('/new_day/<int:cicle_id>')
+def new_day(cicle_id):
+    return render_template('new_day.html', cicle_id=cicle_id)
+
+@app.route('/create_day/', methods=['POST'])
+def create_day():
+    cicle_id = request.form['cicle_id']
+    day = request.form['day']
+    day = Day(day, cicle_id)
+
+    print(request)
+
+    if 'file' not in request.files:
+        # ERR: No file in request
+        return '<p>No file recieved</p>'
+    else:
+        file = request.files['file']
+        filename = file.filename or ''
+        path = os.path.join('dracula/static/upload', filename)
+        file.save(path)
+
+    score, percentage = get_score(path)
+
+    sample = Sample(filename, score, percentage, day.id)
+
+    db.session.add(day)
+    db.session.add(sample)
+
+    db.session.commit()
+
+    return 'Dia creat'
 
 # @app.route('/dbg', methods=['GET'])
 # def dbg():

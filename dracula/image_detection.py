@@ -33,7 +33,7 @@ def get_area_period(img):
     for cnt in period_contours:
         # Get the area_period of each contour 
         area_period += cv2.contourArea(cnt)
-    write_period(img, area_period, period_contours)
+    # write_period(img, area_period, period_contours)
     return area_period
 
 # Get area of towel
@@ -47,7 +47,7 @@ def get_total_area(img):
     for cnt in towel_contours:
         area_towel += cv2.contourArea(cnt)
     area_period = get_area_period(img)
-    write_towel(img, area_towel, towel_contours)
+    # write_towel(img, area_towel, towel_contours)
     return area_towel+area_period, area_period 
 
 def compute_percentage(img):
