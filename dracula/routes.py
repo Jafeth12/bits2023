@@ -1,6 +1,7 @@
 import os
 from flask import render_template, request, jsonify, url_for
 from dracula import app, db
+from dracula.quiz import questions 
 
 @app.route('/')
 def index():
@@ -13,6 +14,10 @@ def home():
 @app.route('/uploads')
 def uploads():
     return render_template('uploads.html')
+
+@app.route('/quiz')
+def quiz():
+    return render_template('samanta_quiz.html', quest=questions)
 
 # === Routes ===
 
