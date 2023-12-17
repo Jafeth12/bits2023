@@ -20,9 +20,14 @@ def home():
 @app.route('/cicle/<int:id>')
 def cicle(id):
     cicle = Cicle.query.filter_by(id=id)
-    days = Day.query.filter_by(cicle_id=id)
 
-    return render_template('cicle.html', cicle=cicle, days=days)
+    if cicle.count() == 0:
+        return 'Cicle not found'
+
+    days = Day.query.filter_by(cicle_id=id)
+    samples = Sample.query.all()
+
+    return render_template('cicle.html', cicle=id, days=days, samples=samples)
 
 @app.route('/quiz')
 def quiz():

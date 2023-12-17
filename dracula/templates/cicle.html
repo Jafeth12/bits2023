@@ -5,13 +5,25 @@
 <!-- ciclo id at $id -->
 
 <div class="row">
-    <h1> Ciclo {{ cicle.id }} </h1>
+    <h1> Ciclo {{ cicle }} </h1>
 
     {% for day in days %}
       <div class="card" style="width: 100%;">
         <div class="card-body">
-          <div class="text-center">
+          <div class="">
             <h1 class="text-start"> {{ day.date }} </h1>
+
+                {% for sample in samples %}
+                    {% if sample.day_id == day.id %}
+                        
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <p class="card-text"> Score: {{ sample.score }} </p>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                {% endfor %}
           </div>
         </div>
       </div>
