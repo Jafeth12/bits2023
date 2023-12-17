@@ -56,7 +56,7 @@ def new_cicle():
     cicle = Cicle()
     db.session.add(cicle)
     db.session.commit()
-    return 'Afegir cicle';
+    return 'Afegir cicle'
 
 @app.route('/new_day/<int:cicle_id>')
 def new_day(cicle_id):
